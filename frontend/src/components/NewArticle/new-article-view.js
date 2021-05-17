@@ -64,7 +64,7 @@ const NewArticleView = ({article, category, onSubmit, sectionTitles}) => {
     }
 
     function submitDisabled() {
-        return sections[0].content.text.length === 0 || methodName.length === 0;
+        return methodName.length === 0 || sections.some(section => section.content.text.length === 0);
     }
 
     function removeSection(index) {

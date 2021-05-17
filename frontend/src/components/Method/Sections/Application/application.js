@@ -12,10 +12,4 @@ const Application = ({contents}) => {
     )
 }
 
-Application.defaultProps = {
-    contents: {
-        text: "No applications found for this method"
-    }
-}
-
 export default Application
