@@ -1,15 +1,12 @@
 import {AUTO_SECTION_TITLES, INFO_SECTION_TITLES, PROTOCOLS, SECTION_TITLES} from "../constants";
 
-export const getSectionsForShow = (sections) => {
-    return sortSectionsBy(sections, SECTION_TITLES);
-}
-
 //todo rename
 export const getSectionsForPreview = (sections) => {
-    console.log(sections)
-    const sortedSections = sortSectionsBy(sections, INFO_SECTION_TITLES);
-    pushAutoSections(sortedSections)
-    return sortedSections
+    return sortAndAddEmpty(sections, SECTION_TITLES)
+}
+
+export const getSectionsForSubmit = (sections) => {
+    return sortAndAddEmpty(sections, INFO_SECTION_TITLES)
 }
 
 const pushAutoSections = (sections) => {
@@ -33,6 +30,22 @@ export const getSectionsForMain = (sections) => {
     return sortedSections
 }
 
+const sortAndAddEmpty = (sections, example) => {
+    const resultSections = []
+    outer:
+        for (const title of example) {
+            for (const section of sections) {
+                if (section.name === title) {
+                    resultSections.push(section)
+                    continue outer
+                }
+            }
+            resultSections.push({
+                name: title
+            })
+        }
+    return resultSections
+}
 
 const sortSectionsBy = (sections, example) => {
     const sortedSections = [];
@@ -44,7 +57,4 @@ const sortSectionsBy = (sections, example) => {
         }
     }
     return sortedSections;
-}
-
-export class getSectionsForSubmit {
 }

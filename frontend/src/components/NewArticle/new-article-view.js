@@ -3,7 +3,7 @@ import React, {useState} from "react";
 import MethodPreview from "../Method/MethodPreview/method-preview";
 import {Dropdown, DropdownButton} from "react-bootstrap";
 import {FaTimes} from "react-icons/all";
-import {getSectionsForPreview, getSectionsForShow} from "../../utils/sections";
+import {getSectionsForPreview, getSectionsForSubmit} from "../../utils/sections";
 import {PROTOCOL} from "../../constants";
 import Preloader from "../common/Preloader/preloader";
 
@@ -73,15 +73,19 @@ const NewArticleView = ({article, category, onSubmit, sectionTitles}) => {
         setSections(newSections);
     }
 
+    function isNewProtocol() {
+        return !!article
+    }
+
     function handleSubmit(e) {
         e.preventDefault();
-        onSubmit(getSectionsForPreview(sections), methodName)
+        onSubmit(isNewProtocol() ? sections : getSectionsForSubmit(sections), methodName)
     }
 
     function getHeaderBlock() {
         return (
             <h4>
-                {article ? ("Article: " + article.version?.name)
+                {isNewProtocol() ? ("Article: " + article.version?.name)
                     : ("Category: " + category?.name)}
             </h4>
         );
@@ -90,19 +94,19 @@ const NewArticleView = ({article, category, onSubmit, sectionTitles}) => {
     function getNameField() {
         return (
             <h4>
-                {article ? "Protocol name" : "Method name"}
+                {isNewProtocol() ? "Protocol name" : "Method name"}
             </h4>
         );
     }
 
     function getNamePlaceholder() {
-        return article ? "Input protocol name" : "Input method name"
+        return isNewProtocol() ? "Input protocol name" : "Input method name"
     }
 
     if (!category && !article) return <Preloader/>
 
     if (preview) return <MethodPreview name={methodName}
-                                       sections={category ? getSectionsForPreview(sections) : getSectionsForShow(sections)}
+                                       sections={isNewProtocol() ? sections : getSectionsForPreview(sections)}
                                        goBack={() => setPreview(false)}/>
 
     return (
