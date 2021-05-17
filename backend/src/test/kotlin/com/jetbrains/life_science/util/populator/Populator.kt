@@ -26,7 +26,8 @@ internal class Populator(
 
     private fun clear() {
         val request = DeleteByQueryRequest(indexName).setQuery(QueryBuilders.matchAllQuery())
-        client.deleteByQuery(request, RequestOptions.DEFAULT)
+        val deleteByQuery = client.deleteByQuery(request, RequestOptions.DEFAULT)
+        println("hmmm ${deleteByQuery.total}")
     }
 
     fun createIndex() {
