@@ -19,8 +19,12 @@ const NewArticleView = ({article, category, onSubmit}) => {
         }
     }
 
+    function getFirstSectionName() {
+        return isNewProtocol() ? PROTOCOL : INFO_SECTION_TITLES[0];
+    }
+
     const [preview, setPreview] = useState(false);
-    const [sections, setSections] = useState([getNewSection(INFO_SECTION_TITLES[0])]);
+    const [sections, setSections] = useState([getNewSection(getFirstSectionName())]);
     const [methodName, setMethodName] = useState("")
 
     const addNewSection = () => {
@@ -125,7 +129,7 @@ const NewArticleView = ({article, category, onSubmit}) => {
                 </div>
                 <div className="form-group">
                     <h2 className="col-form-label">
-                        {INFO_SECTION_TITLES[0]}
+                        {getFirstSectionName()}
                     </h2>
                     <textarea className="form-control new-article-form__section-content"
                               onChange={
