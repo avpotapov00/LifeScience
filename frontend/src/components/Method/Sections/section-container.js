@@ -31,7 +31,7 @@ const SectionContainer = (props) => {
 
     if (!isReceived && hasContents) return <Preloader/>
     return (
-        <Section contents={contents} name={section.name} articleId={articleId}/>
+        <Section contents={hasContents && contents} name={section.name} articleId={articleId}/>
     )
 
 }

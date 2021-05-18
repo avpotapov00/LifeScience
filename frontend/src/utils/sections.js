@@ -26,8 +26,8 @@ export const getSectionsForProtocol = (sections) => {
 }
 
 export const getSectionsForMain = (sections) => {
-    const sortedSections = sortSectionsBy(sections, INFO_SECTION_TITLES);
-    sortedSections.splice(1, 0, {name: PROTOCOLS})
+    const sortedSections = sortAndAddEmpty(sections, INFO_SECTION_TITLES);
+    sortedSections.splice(1, 1, {name: PROTOCOLS})
     pushAutoSections(sortedSections)
     return sortedSections
 }
