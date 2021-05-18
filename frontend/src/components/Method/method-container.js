@@ -14,10 +14,10 @@ import {METHOD_URL, PROTOCOLS} from "../../constants";
 
 const MethodContainer = () => {
 
-    const [versionId, setVersionId] = useState(1);
     const match = useRouteMatch()
     const dispatch = useDispatch()
     const history = useHistory();
+    const [versionId, setVersionId] = useState(match.params.versionId);
 
     const error = useSelector(state => state.method.error)
     const name = useSelector(state => state.method.name)
