@@ -43,7 +43,7 @@ const NewArticleContainer = () => {
         history.push(`${METHOD_URL}/${versionId}`);
     }
 
-    return <NewArticleView category={category} onSubmit={onSubmit} sectionTitles={SECTION_TITLES}/>
+    return <NewArticleView category={category} onSubmit={onSubmit}/>
 }
 
 export default withRouter(NewArticleContainer);

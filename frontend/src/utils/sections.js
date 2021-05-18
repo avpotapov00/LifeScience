@@ -1,8 +1,10 @@
 import {AUTO_SECTION_TITLES, INFO_SECTION_TITLES, PROTOCOLS, SECTION_TITLES} from "../constants";
 
 //todo rename
-export const getSectionsForPreview = (sections) => {
-    return sortAndAddEmpty(sections, SECTION_TITLES)
+export const getSectionsForArticlePreview = (sections) => {
+    const sortedSections = sortAndAddEmpty(sections, SECTION_TITLES)
+    sortedSections.splice(1, 1, {name: PROTOCOLS})
+    return sortedSections
 }
 
 export const getSectionsForSubmit = (sections) => {

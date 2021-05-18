@@ -6,6 +6,7 @@ import {Link} from "react-router-dom";
 import {withRouter} from "react-router";
 import {METHOD_URL, PROTOCOL} from "../../../../constants";
 import {passSectionFunc} from "../../../../redux/method-reducer";
+import NoContent from "../no-content";
 
 
 const ProtocolList = ({articleId}) => {
@@ -13,7 +14,7 @@ const ProtocolList = ({articleId}) => {
     const dispatch = useDispatch()
 
     const getProtocols = () => {
-        dispatch(fetchProtocols(articleId))
+        if (articleId) dispatch(fetchProtocols(articleId))
     }
 
     useEffect(() => {
@@ -31,6 +32,7 @@ const ProtocolList = ({articleId}) => {
         dispatch(passSectionFunc(section => section.name === PROTOCOL))
     }
 
+    if (!articleId) return <NoContent/>
     if (!isReceived) return <Preloader/>
 
     return (

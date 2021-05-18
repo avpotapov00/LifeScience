@@ -3,12 +3,12 @@ import React, {useState} from "react";
 import MethodPreview from "../Method/MethodPreview/method-preview";
 import {Dropdown, DropdownButton} from "react-bootstrap";
 import {FaTimes} from "react-icons/all";
-import {getSectionsForPreview, getSectionsForSubmit} from "../../utils/sections";
-import {PROTOCOL} from "../../constants";
+import {getSectionsForMain, getSectionsForArticlePreview, getSectionsForSubmit} from "../../utils/sections";
+import {INFO_SECTION_TITLES, PROTOCOL, SECTION_TITLES} from "../../constants";
 import Preloader from "../common/Preloader/preloader";
 
 
-const NewArticleView = ({article, category, onSubmit, sectionTitles}) => {
+const NewArticleView = ({article, category, onSubmit}) => {
 
     const getNewSection = (sectionName) => {
         return {
@@ -20,7 +20,7 @@ const NewArticleView = ({article, category, onSubmit, sectionTitles}) => {
     }
 
     const [preview, setPreview] = useState(false);
-    const [sections, setSections] = useState([getNewSection(sectionTitles[0])]);
+    const [sections, setSections] = useState([getNewSection(INFO_SECTION_TITLES[0])]);
     const [methodName, setMethodName] = useState("")
 
     const addNewSection = () => {
@@ -106,7 +106,7 @@ const NewArticleView = ({article, category, onSubmit, sectionTitles}) => {
     if (!category && !article) return <Preloader/>
 
     if (preview) return <MethodPreview name={methodName}
-                                       sections={isNewProtocol() ? sections : getSectionsForPreview(sections)}
+                                       sections={isNewProtocol() ? sections : getSectionsForArticlePreview(sections)}
                                        goBack={() => setPreview(false)}/>
 
     return (
@@ -125,7 +125,7 @@ const NewArticleView = ({article, category, onSubmit, sectionTitles}) => {
                 </div>
                 <div className="form-group">
                     <h2 className="col-form-label">
-                        {sectionTitles[0]}
+                        {INFO_SECTION_TITLES[0]}
                     </h2>
                     <textarea className="form-control new-article-form__section-content"
                               onChange={
@@ -143,8 +143,7 @@ const NewArticleView = ({article, category, onSubmit, sectionTitles}) => {
                                 <DropdownButton variant="light" id={"choose-section-" + index}
                                                 title={sections[index].name ? sections[index].name : "Choose section"}>
                                     {
-                                        sectionTitles
-
+                                        INFO_SECTION_TITLES
                                             .filter(sectionCanBeChosen)
                                             .map(type => (
                                                 <Dropdown.Item
